@@ -8,8 +8,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.contact.ui.theme.home.HomeDestination
 import com.example.contact.ui.theme.home.HomeScreen
-import java.io.Console
-
 /**
  * Provides Navigation graph for the application.
  */
