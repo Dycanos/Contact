@@ -6,6 +6,7 @@ import androidx.lifecycle.viewmodel.CreationExtras
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.contact.ContactApplication
+import com.example.contact.ui.theme.home.HomeViewModel
 
 /**
  * Provides Factory to create instance of ViewModel for the entire Inventory app

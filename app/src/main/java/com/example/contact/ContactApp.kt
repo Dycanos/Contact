@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalMaterial3Api::class)
+
 package com.example.contact
 
 import android.annotation.SuppressLint
@@ -28,7 +30,6 @@ fun ContactApp(navController: NavHostController = rememberNavController()) {
 /**
  * App bar to display title and conditionally display the back navigation.
  */
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ContactTopAppBar(
     title: String,

@@ -1,6 +1,5 @@
 package com.example.contact.ui.theme.home
 
-import android.content.ClipData.Item
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -19,12 +18,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.contact.ContactTopAppBar
-import com.example.contact.R
 import com.example.contact.data.Person
 import com.example.contact.ui.theme.AppViewModelProvider
 import com.example.contact.ui.theme.navigation.NavigationDestination
+import com.example.contact.R
 
 object HomeDestination : NavigationDestination {
     override val route = "home"
@@ -112,5 +112,11 @@ fun ContactCard(
     person: Person,
     modifier: Modifier = Modifier
 ) {
+    Text(text = "test")
+}
 
+@Preview
+@Composable
+fun HomeScreenPreview(){
+    HomeBody(personList = listOf(Person(0,"test","nom","0909999999","cccc@ccc.com")), onPersonClick = {})
 }
