@@ -1,11 +1,12 @@
 package com.example.contact.ui.theme.navigation
 
-import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.contact.ui.theme.person.ContactAddDestination
+import com.example.contact.ui.theme.person.ContactAddScreen
 import com.example.contact.ui.theme.home.HomeDestination
 import com.example.contact.ui.theme.home.HomeScreen
 /**
@@ -22,11 +23,24 @@ fun ContactNavHost(
         modifier = modifier
     ) {
         composable(route = HomeDestination.route) {
-            Log.d("Test","Ici")
             HomeScreen(
-                navigateToPersonEntry = {  },
-                navigateToPersonUpdate = {  }
+                navigateToPersonEntry = { navController.navigate(ContactAddDestination.route) },
+                navigateToPersonUpdate = { navController.navigate(ContactUpdateDestination.route) }
+            )
+        }
+        composable(route = ContactAddDestination.route) {
+            ContactAddScreen(
+                navigateBack = { navController.popBackStack() },
+                onNavigateUp = { navController.navigateUp() }
+            )
+        }
+        composable(route = ContactUpdateDestination.route) {
+            ContactUpdateScreen(
+                navigateBack = { navController.popBackStack() },
+                onNavigateUp = { navController.navigateUp() }
             )
         }
     }
 }
+
+

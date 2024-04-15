@@ -2,4 +2,12 @@
     <string name="app_name">Contact</string>
     <string name="back_button">BACK</string>
     <string name="no_contact">Vous n\'avez pas de contact</string>
+    <string name="contact_entry_title">Ajouter un contact</string>
+    <string name="add_title">Ajouter un contact</string>
+    <string name="add">Ajouter</string>
+    <string name="firstName">prénom</string>
+    <string name="lastName">Nom de famille</string>
+    <string name="phoneNumber">Numéro de téléphone</string>
+    <string name="email">Email</string>
+    <string name="required_fields">*Champ requis</string>
 </resources>

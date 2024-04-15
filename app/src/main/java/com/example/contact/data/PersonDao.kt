@@ -26,17 +26,17 @@ interface PersonDao {
      * insert one person in the database
      */
     @Insert
-    fun insertPerson(person: Person)
+    suspend fun insertPerson(person: Person)
 
     /**
      * delete one person from the database
      */
     @Delete
-    fun deletePerson(person: Person)
+    suspend fun deletePerson(person: Person)
 
     /**
      * update one person in the database
      */
     @Update
-    fun updatePerson(person: Person)
+    suspend fun updatePerson(person: Person)
 }

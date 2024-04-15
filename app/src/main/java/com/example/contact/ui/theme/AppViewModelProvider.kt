@@ -7,6 +7,7 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.contact.ContactApplication
 import com.example.contact.ui.theme.home.HomeViewModel
+import com.example.contact.ui.theme.person.ContactAddViewModel
 
 /**
  * Provides Factory to create instance of ViewModel for the entire Inventory app
@@ -16,6 +17,9 @@ object AppViewModelProvider {
         // Initializer for HomeViewModel
         initializer {
             HomeViewModel(personRepository = inventoryApplication().container.personRepository)
+        }
+        initializer {
+            ContactAddViewModel(personRepository = inventoryApplication().container.personRepository)
         }
     }
 }
