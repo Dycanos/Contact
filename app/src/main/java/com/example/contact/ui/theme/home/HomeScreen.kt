@@ -1,5 +1,6 @@
 package com.example.contact.ui.theme.home
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -32,7 +33,9 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.contact.ContactTopAppBar
 import com.example.contact.data.Person
@@ -98,7 +101,7 @@ private fun HomeBody(
 ){
 
     Column(
-        modifier = modifier,
+        modifier = modifier.padding(8.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             if (personList.isEmpty()){
@@ -141,54 +144,62 @@ fun ContactCard(
 ) {
     Card(
         modifier = modifier,
-        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
+        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
+        border = BorderStroke(2.dp,MaterialTheme.colorScheme.primary),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.primaryContainer,
+            contentColor = MaterialTheme.colorScheme.onPrimaryContainer)
     ) {
         Column(
             modifier = modifier,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            PersonIdentity(person, modifier = Modifier)
-            PersonPhoneNumber(person, modifier = Modifier)
-            PersonEmail(person, modifier = Modifier)
+            Spacer(modifier = Modifier.padding(dimensionResource(id = R.dimen.spacer_detail)))
+            PersonIdentity(person, modifier = Modifier, fontSize = 15.sp)
+            Spacer(modifier = Modifier.padding(dimensionResource(id = R.dimen.spacer_detail)))
+            PersonPhoneNumber(person, modifier = Modifier, fontSize = 15.sp)
+            Spacer(modifier = Modifier.padding(dimensionResource(id = R.dimen.spacer_detail)))
+            PersonEmail(person, modifier = Modifier, fontSize = 15.sp)
+            Spacer(modifier = Modifier.padding(dimensionResource(id = R.dimen.spacer_detail)))
         }
     }
 }
 
 @Composable
-fun PersonEmail(person: Person, modifier: Modifier = Modifier) {
+fun PersonEmail(person: Person, modifier: Modifier = Modifier,fontSize: TextUnit) {
     Row(
         modifier = modifier,
         verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(imageVector = Icons.Default.Email, contentDescription = null)
         Spacer(modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_extraSmall)))
-        Text(text = person.email)
+        Text(text = person.email,fontSize = fontSize)
     }
 }
 
 @Composable
-fun PersonPhoneNumber(person: Person, modifier: Modifier = Modifier) {
+fun PersonPhoneNumber(person: Person, modifier: Modifier = Modifier,fontSize: TextUnit) {
     Row(
         modifier = modifier,
         verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(imageVector = Icons.Default.Phone, contentDescription = null)
         Spacer(modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_extraSmall)))
-        Text(text = person.phoneNumber)
+        Text(text = person.phoneNumber,fontSize = fontSize)
     }
 }
 
 @Composable
-fun PersonIdentity(person: Person,modifier: Modifier = Modifier) {
+fun PersonIdentity(person: Person,modifier: Modifier = Modifier,fontSize: TextUnit) {
     Row(
         modifier = modifier,
         verticalAlignment = Alignment.CenterVertically
     ){
         Icon(imageVector = Icons.Default.Person, contentDescription = null)
         Spacer(modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_extraSmall)))
-        Text(text = person.firstName)
+        Text(text = person.firstName,fontSize = fontSize)
         Spacer(modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_extraSmall)))
-        Text(text = person.lastName)
+        Text(text = person.lastName,fontSize = fontSize)
     }
 }
 

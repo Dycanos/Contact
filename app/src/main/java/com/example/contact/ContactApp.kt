@@ -14,6 +14,7 @@ import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.contact.ui.theme.navigation.ContactNavHost
@@ -39,7 +40,7 @@ fun ContactTopAppBar(
     navigateUp: () -> Unit = {}
 ) {
     CenterAlignedTopAppBar(
-        title = { Text(title) },
+        title = { Text(title, fontSize = 25.sp) },
         modifier = modifier,
         scrollBehavior = scrollBehavior,
         navigationIcon = {

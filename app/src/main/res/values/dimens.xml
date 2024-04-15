@@ -4,4 +4,7 @@
     <dimen name="padding_large">20dp</dimen>
     <dimen name="padding_extraSmall">2dp</dimen>
     <dimen name="padding_medium">16dp</dimen>
+    <dimen name="spacer_detail">6dp</dimen>
+    <dimen name="lastname_detail">40.sp</dimen>
+    <dimen name="firstname_detail">30sp</dimen>
 </resources>

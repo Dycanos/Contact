@@ -9,6 +9,7 @@ import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.contact.ContactApplication
 import com.example.contact.ui.theme.home.HomeViewModel
 import com.example.contact.ui.theme.person.ContactAddViewModel
+import com.example.contact.ui.theme.person.ContactDetailsViewModel
 import com.example.contact.ui.theme.person.ContactUpdateViewModel
 
 /**
@@ -25,6 +26,11 @@ object AppViewModelProvider {
         }
         initializer {
             ContactUpdateViewModel(
+                savedStateHandle = this.createSavedStateHandle(),
+                personRepository = inventoryApplication().container.personRepository)
+        }
+        initializer {
+            ContactDetailsViewModel(
                 savedStateHandle = this.createSavedStateHandle(),
                 personRepository = inventoryApplication().container.personRepository)
         }

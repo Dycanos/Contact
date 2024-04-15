@@ -11,6 +11,8 @@ import com.example.contact.ui.theme.person.ContactAddDestination
 import com.example.contact.ui.theme.person.ContactAddScreen
 import com.example.contact.ui.theme.home.HomeDestination
 import com.example.contact.ui.theme.home.HomeScreen
+import com.example.contact.ui.theme.person.ContactDetailsDestination
+import com.example.contact.ui.theme.person.ContactDetailsScreen
 import com.example.contact.ui.theme.person.ContactUpdateDestination
 import com.example.contact.ui.theme.person.ContactUpdateScreen
 
@@ -30,7 +32,7 @@ fun ContactNavHost(
         composable(route = HomeDestination.route) {
             HomeScreen(
                 navigateToPersonEntry = { navController.navigate(ContactAddDestination.route) },
-                navigateToPersonUpdate = { navController.navigate("${ContactUpdateDestination.route}/${it}") }
+                navigateToPersonUpdate = { navController.navigate("${ContactDetailsDestination.route}/${it}") }
             )
         }
         composable(route = ContactAddDestination.route) {
@@ -47,6 +49,16 @@ fun ContactNavHost(
             ContactUpdateScreen(
                 navigateBack = { navController.popBackStack() },
                 onNavigateUp = { navController.navigateUp() }
+            )
+        }
+        composable(route = ContactDetailsDestination.routeWithArgs,
+            arguments = listOf(navArgument(ContactDetailsDestination.personIdArg){
+                type = NavType.IntType
+            }))
+        {
+            ContactDetailsScreen(
+                navigateBack = { navController.popBackStack() },
+                navigateToUpdatePerson = { navController.navigate("${ContactUpdateDestination.route}/${it}") }
             )
         }
     }
