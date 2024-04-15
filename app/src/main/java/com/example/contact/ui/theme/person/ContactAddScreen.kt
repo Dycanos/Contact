@@ -84,7 +84,7 @@ fun PersonAddBody(
             modifier = Modifier)
         Spacer(modifier = Modifier.padding(dimensionResource(R.dimen.padding_extraSmall)))
         Button(onClick = onSaveClick) {
-            Text(text = stringResource(id = R.string.add))
+            Text(text = stringResource(id = R.string.save))
         }
     }
 }

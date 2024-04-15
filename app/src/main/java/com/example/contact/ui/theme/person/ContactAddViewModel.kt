@@ -14,7 +14,7 @@ class ContactAddViewModel (private val personRepository: PersonRepository):ViewM
 
 
     /**
-     * Updates the [itemUiState] with the value provided in the argument. This method also triggers
+     * Updates the [personUiState] with the value provided in the argument. This method also triggers
      * a validation for input values.
      */
     fun updateUiState(personDetails: PersonDetails) {
