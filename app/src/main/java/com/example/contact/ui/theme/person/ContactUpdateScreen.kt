@@ -43,7 +43,8 @@ fun ContactUpdateScreen(
                 canNavigateBack = true,
                 navigateUp = onNavigateUp
             )
-        }
+        },
+        modifier = modifier
     ) { innerPadding ->
         PersonAddBody(
             personUiState = viewModel.personUiState,
