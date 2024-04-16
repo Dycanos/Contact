@@ -8,8 +8,6 @@ interface PersonRepository {
 
     fun getPersonById(id:Int):Flow<Person>
 
-    fun getPersonByKeyword(str:String):Flow<List<Person>>
-
     suspend fun insertPerson(person: Person)
 
     suspend fun updatePerson(person: Person)

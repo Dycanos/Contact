@@ -1,5 +1,6 @@
 package com.example.contact.ui.theme.home
 
+import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -66,8 +67,6 @@ fun HomeScreen(
     val homeUiState by viewModel.homeUiState.collectAsState()
     val searchKeyword by viewModel.searchKeyword.collectAsState()
 
-    val onSearchKeywordChanged: (String) -> Unit = { viewModel.updateSearchKeyword(it) }
-
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
 
     Scaffold (
@@ -100,7 +99,7 @@ fun HomeScreen(
                 modifier = Modifier
                     .padding(innerPadding)
                     .fillMaxSize(),
-                updateSearchKeyword = onSearchKeywordChanged,
+                updateSearchKeyword = { viewModel.updateSearchKeyword(it) },
                 searchKeyword = searchKeyword
             )
         }
@@ -142,7 +141,7 @@ private fun ContactList(
     onPersonClick: (Person) -> Unit,
     modifier: Modifier = Modifier
 ){
-
+   // Log.d("ERREUR",personList.size.toString())
     LazyColumn(modifier = modifier) {
         items(items = personList, key = {it.id}) { person ->
             ContactCard(

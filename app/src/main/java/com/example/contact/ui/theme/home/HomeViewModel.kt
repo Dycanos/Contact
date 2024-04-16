@@ -7,39 +7,35 @@ import com.example.contact.data.PersonRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 class HomeViewModel(private val personRepository: PersonRepository):ViewModel(){
 
-    var homeUiState: StateFlow<HomeUiState> =
-        personRepository.getAllPerson().map {
-            HomeUiState(it)
-        }
-            .stateIn(
-                scope = viewModelScope,
-                started = SharingStarted.WhileSubscribed(TIMEOUT_MILLIS),
-                initialValue = HomeUiState()
-            )
-
     private val _searchKeyword = MutableStateFlow("")
+    
+    var homeUiState: StateFlow<HomeUiState> = combine(_searchKeyword,personRepository.getAllPerson()){
+        searchKeyword,personList -> if (searchKeyword.isEmpty()){
+            HomeUiState(personList)
+    }else{
+        val filteredList = personList.filter { person -> person.lastName.contains(searchKeyword,ignoreCase = true) }
+        HomeUiState(filteredList)
+    }
+    }.stateIn(scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(TIMEOUT_MILLIS),
+        initialValue = HomeUiState())
+
+
+
     val searchKeyword: StateFlow<String>
         get() {
             return _searchKeyword
         }
 
     fun updateSearchKeyword(str: String){
-       viewModelScope.launch {
-           homeUiState = personRepository.getPersonByKeyword(str).map {
-               HomeUiState(it)
-           }
-               .stateIn(
-                   scope = viewModelScope,
-                   started = SharingStarted.WhileSubscribed(TIMEOUT_MILLIS),
-                   initialValue = HomeUiState()
-               )
-       }
+        _searchKeyword.value = str
     }
     companion object {
         private const val TIMEOUT_MILLIS = 5_000L
