@@ -64,7 +64,8 @@ fun HomeScreen(
     viewModel: HomeViewModel = viewModel(factory = AppViewModelProvider.Factory)
 ){
     val homeUiState by viewModel.homeUiState.collectAsState()
-    val onSearchChanged: (String) -> Unit = { viewModel.updateUiState(it) }
+    val searchKeyword by viewModel.searchKeyword.collectAsState()
+
     val onSearchKeywordChanged: (String) -> Unit = { viewModel.updateSearchKeyword(it) }
 
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
@@ -99,8 +100,8 @@ fun HomeScreen(
                 modifier = Modifier
                     .padding(innerPadding)
                     .fillMaxSize(),
-                onChangeValue = onSearchChanged,
-                updateSearchKeyword = onSearchKeywordChanged
+                updateSearchKeyword = onSearchKeywordChanged,
+                searchKeyword = searchKeyword
             )
         }
 
@@ -113,8 +114,8 @@ private fun HomeBody(
     personList:List<Person>,
     onPersonClick: (Int) -> Unit,
     modifier: Modifier = Modifier,
-    onChangeValue: (String)->Unit,
-    updateSearchKeyword: (String) ->Unit
+    updateSearchKeyword: (String) ->Unit,
+    searchKeyword:String
 ){
 
     Column(
@@ -122,10 +123,10 @@ private fun HomeBody(
         horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             if (personList.isEmpty()){
-                SearchBar(modifier = Modifier,onChangeValue = onChangeValue,updateSearchKeyword = updateSearchKeyword)
+                SearchBar(modifier = Modifier,updateSearchKeyword = updateSearchKeyword,searchKeyword = searchKeyword)
                 Text(text = stringResource(R.string.no_contact))
             }else{
-                SearchBar(modifier = Modifier,onChangeValue = onChangeValue,updateSearchKeyword = updateSearchKeyword)
+                SearchBar(modifier = Modifier,updateSearchKeyword = updateSearchKeyword,searchKeyword = searchKeyword)
                 ContactList(
                     personList = personList,
                     onPersonClick = { onPersonClick(it.id) },
@@ -224,15 +225,14 @@ fun PersonIdentity(person: Person,modifier: Modifier = Modifier,fontSize: TextUn
 @Composable
 fun SearchBar(
     modifier: Modifier = Modifier,
-    onChangeValue: (String)->Unit,
-    updateSearchKeyword: (String)->Unit
+    updateSearchKeyword: (String)->Unit,
+    searchKeyword: String
 ){
-    var search by remember { mutableStateOf("")}
+    var search by remember { mutableStateOf(searchKeyword)}
     TextField(
         value = search,
         onValueChange = {
             search = it
-            onChangeValue(search)
             updateSearchKeyword(it)
                         },
         leadingIcon = {
@@ -257,13 +257,13 @@ fun SearchBar(
 @Preview
 @Composable
 fun SearchBarPreview(){
-    SearchBar(onChangeValue = {}, updateSearchKeyword = {})
+    SearchBar( updateSearchKeyword = {}, searchKeyword = "")
 }
 
 @Preview
 @Composable
 fun HomeScreenPreview(){
-    HomeBody(personList = listOf(Person(0,"test","nom","0909999999","cccc@ccc.com")), onPersonClick = {}, onChangeValue = {}, updateSearchKeyword = {})
+    HomeBody(personList = listOf(Person(0,"test","nom","0909999999","cccc@ccc.com")), onPersonClick = {}, updateSearchKeyword = {}, searchKeyword = "")
 }
 
 @Preview
