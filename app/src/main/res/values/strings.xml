@@ -17,4 +17,5 @@
     <string name="delete_question">Êtes-vous sur de vouloir supprimer ce contact ?</string>
     <string name="no">Non</string>
     <string name="yes">Oui</string>
+    <string name="placeholder">Cherche un contact</string>
 </resources>

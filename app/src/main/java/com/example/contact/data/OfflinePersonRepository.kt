@@ -11,6 +11,10 @@ class OfflinePersonRepository(private val personDao: PersonDao):PersonRepository
        return personDao.getPersonById(id)
     }
 
+    override fun getPersonByKeyword(str: String): Flow<List<Person>> {
+       return personDao.getPersonByKeyword(str)
+    }
+
     override suspend fun insertPerson(person: Person) {
         personDao.insertPerson(person)
     }

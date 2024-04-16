@@ -23,6 +23,12 @@ interface PersonDao {
     fun getPersonById(id:Int): Flow<Person>
 
     /**
+     * get person with keyword in the database
+     */
+    @Query(" SELECT * FROM person WHERE lastName LIKE '%'||:str||'%' order by lastName ASC ")
+    fun getPersonByKeyword(str:String): Flow<List<Person>>
+
+    /**
      * insert one person in the database
      */
     @Insert
