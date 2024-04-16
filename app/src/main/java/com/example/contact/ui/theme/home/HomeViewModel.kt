@@ -8,14 +8,12 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
-import kotlinx.coroutines.launch
 
 class HomeViewModel(private val personRepository: PersonRepository):ViewModel(){
 
     private val _searchKeyword = MutableStateFlow("")
-    
+
     var homeUiState: StateFlow<HomeUiState> = combine(_searchKeyword,personRepository.getAllPerson()){
         searchKeyword,personList -> if (searchKeyword.isEmpty()){
             HomeUiState(personList)
